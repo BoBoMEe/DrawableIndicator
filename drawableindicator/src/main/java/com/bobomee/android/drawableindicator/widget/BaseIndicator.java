@@ -10,6 +10,7 @@ import android.os.Build;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -22,14 +23,10 @@ import com.bobomee.android.drawableindicator.R;
  */
 public class BaseIndicator extends ViewGroup {
 
-    protected static final int GRAVITY_LEFT = 0;
-    protected static final int GRAVITY_CENTER = 1;
-    protected static final int GRAVITY_RIGHT = 2;
-
     protected int mIndicatorWidth = 6;
     protected int mIndicatorHeight = 6;
     protected int mIndicatorMargin = 6;
-    protected int mIndicatorGravity = GRAVITY_CENTER;
+    protected int mIndicatorGravity = Gravity.CENTER;
 
     protected ViewPager mViewPager;
     protected int mIndicatorCount;
@@ -221,7 +218,7 @@ public class BaseIndicator extends ViewGroup {
     }
 
     private int startDrawPosition(final int containerWidth) {
-        if (mIndicatorGravity == GRAVITY_LEFT) {
+        if (mIndicatorGravity == Gravity.LEFT) {
             return 0;
         }
         float tabItemsLength = mIndicatorCount * (mIndicatorWidth + mIndicatorMargin) - mIndicatorMargin;
@@ -229,7 +226,7 @@ public class BaseIndicator extends ViewGroup {
         if (containerWidth < tabItemsLength) {
             return 0;
         }
-        if (mIndicatorGravity == GRAVITY_CENTER) {
+        if (mIndicatorGravity == Gravity.CENTER) {
             return (int) ((containerWidth - tabItemsLength) / 2);
         }
         return (int) (containerWidth - tabItemsLength);

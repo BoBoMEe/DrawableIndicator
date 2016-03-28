@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="indicator_style" />
+    <attr name="drawable_indicator_style" />
+
+    <attr name="indicator_width" format="dimension" />
+    <attr name="indicator_height" format="dimension" />
+    <attr name="indicator_margin" format="dimension" />
+    <attr name="indicator_gravity">
+        <enum name="left" value="0" />
+        <enum name="center" value="1" />
+        <enum name="right" value="2" />
+    </attr>
+    <attr name="indicator_select_background" format="reference|color" />
+    <attr name="indicator_unselect_background" format="reference|color" />
+    <attr name="indicator_isSnap" format="boolean" />
+
+    <attr name="indicator_select_src" format="reference|color" />
+    <attr name="indicator_unselect_src" format="reference|color" />
+
+    <declare-styleable name="BaseIndicator">
+        <attr name="indicator_width" />
+        <attr name="indicator_height" />
+        <attr name="indicator_margin" />
+        <attr name="indicator_gravity" />
+        <attr name="indicator_select_background" />
+        <attr name="indicator_unselect_background" />
+        <attr name="indicator_isSnap" />
+    </declare-styleable>
+
+    <declare-styleable name="DrawableIndicator">
+        <attr name="indicator_select_src" />
+        <attr name="indicator_unselect_src" />
+    </declare-styleable>
+</resources>

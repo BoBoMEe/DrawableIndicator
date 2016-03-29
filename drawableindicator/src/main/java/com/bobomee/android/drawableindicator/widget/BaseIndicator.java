@@ -31,8 +31,8 @@ public class BaseIndicator extends ViewGroup {
     protected ViewPager mViewPager;
     protected int mIndicatorCount;
 
-    protected Drawable mIndicatorDrawable;
-    protected Drawable mSelectedIndicatorDrawable;
+    protected Drawable mIndicatorBackgroundDrawable;
+    protected Drawable mSelectedIndicatorBackgroundDrawable;
 
     protected boolean mIndicatorIsSnap = true;
 
@@ -78,12 +78,12 @@ public class BaseIndicator extends ViewGroup {
         mIndicatorHeight = typedArray.getDimensionPixelSize(R.styleable.BaseIndicator_indicator_height, dp2px(mIndicatorHeight));
         mIndicatorMargin = typedArray.getDimensionPixelSize(R.styleable.BaseIndicator_indicator_margin, dp2px(mIndicatorMargin));
         mIndicatorGravity = typedArray.getInt(R.styleable.BaseIndicator_indicator_gravity, mIndicatorGravity);
-        mIndicatorDrawable = typedArray.getDrawable(R.styleable.BaseIndicator_indicator_unselect_background);
-        if (null == mIndicatorDrawable)
-            mIndicatorDrawable = new ColorDrawable(0x88ffffff);
-        mSelectedIndicatorDrawable = typedArray.getDrawable(R.styleable.BaseIndicator_indicator_select_background);
-        if (null == mSelectedIndicatorDrawable)
-            mSelectedIndicatorDrawable = new ColorDrawable(0x88a7d84c);
+        mIndicatorBackgroundDrawable = typedArray.getDrawable(R.styleable.BaseIndicator_indicator_unselect_background);
+        if (null == mIndicatorBackgroundDrawable)
+            mIndicatorBackgroundDrawable = new ColorDrawable(0x88ffffff);
+        mSelectedIndicatorBackgroundDrawable = typedArray.getDrawable(R.styleable.BaseIndicator_indicator_select_background);
+        if (null == mSelectedIndicatorBackgroundDrawable)
+            mSelectedIndicatorBackgroundDrawable = new ColorDrawable(0x88a7d84c);
         mIndicatorIsSnap = typedArray.getBoolean(R.styleable.BaseIndicator_indicator_isSnap, mIndicatorIsSnap);
 
         typedArray.recycle();
@@ -233,13 +233,13 @@ public class BaseIndicator extends ViewGroup {
     }
 
     public void OnSetSelectedIndicatorView(ImageView mSelectedIndicatorView) {
-        if (null != mSelectedIndicatorDrawable)
-            mSelectedIndicatorView.setBackgroundDrawable(mSelectedIndicatorDrawable);
+        if (null != mSelectedIndicatorBackgroundDrawable)
+            mSelectedIndicatorView.setBackgroundDrawable(mSelectedIndicatorBackgroundDrawable);
     }
 
     public void OnSetIndicatorView(ImageView mIndicatorView, int position) {
-        if (null != mIndicatorDrawable)
-            mIndicatorView.setBackgroundDrawable(mIndicatorDrawable);
+        if (null != mIndicatorBackgroundDrawable)
+            mIndicatorView.setBackgroundDrawable(mIndicatorBackgroundDrawable);
     }
 
     @Override
@@ -307,21 +307,21 @@ public class BaseIndicator extends ViewGroup {
         invalidate();
     }
 
-    public Drawable getmIndicatorDrawable() {
-        return mIndicatorDrawable;
+    public Drawable getmIndicatorBackgroundDrawable() {
+        return mIndicatorBackgroundDrawable;
     }
 
-    public void setmIndicatorDrawable(Drawable mIndicatorDrawable) {
-        this.mIndicatorDrawable = mIndicatorDrawable;
+    public void setmIndicatorBackgroundDrawable(Drawable mIndicatorBackgroundDrawable) {
+        this.mIndicatorBackgroundDrawable = mIndicatorBackgroundDrawable;
         invalidate();
     }
 
-    public Drawable getmSelectedIndicatorDrawable() {
-        return mSelectedIndicatorDrawable;
+    public Drawable getmSelectedIndicatorBackgroundDrawable() {
+        return mSelectedIndicatorBackgroundDrawable;
     }
 
-    public void setmSelectedIndicatorDrawable(Drawable mSelectedIndicatorDrawable) {
-        this.mSelectedIndicatorDrawable = mSelectedIndicatorDrawable;
+    public void setmSelectedIndicatorBackgroundDrawable(Drawable mSelectedIndicatorBackgroundDrawable) {
+        this.mSelectedIndicatorBackgroundDrawable = mSelectedIndicatorBackgroundDrawable;
         invalidate();
     }
 }

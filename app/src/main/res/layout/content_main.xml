@@ -41,13 +41,13 @@
             <com.bobomee.android.drawableindicator.widget.DrawableIndicator
                 android:id="@+id/indicator"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                app:indicator_gravity="left"
-                app:indicator_height="20dp"
+                android:layout_height="50dp"
+                app:indicator_gravity="LEFT"
+                app:indicator_height="30dp"
                 app:indicator_margin="5dp"
                 app:indicator_select_src="@drawable/select_drawable"
                 app:indicator_unselect_src="@drawable/unselect_drawable"
-                app:indicator_width="30dp" />
+                app:indicator_width="50dp" />
 
             <com.scrollloopviewpager.autoscrollviewpager.AutoScrollViewPager
                 android:id="@+id/main_vp1"
@@ -58,7 +58,7 @@
                 android:id="@+id/indicator1"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                app:indicator_gravity="right"
+                app:indicator_gravity="RIGHT"
                 app:indicator_height="8dp"
                 app:indicator_margin="8dp"
                 app:indicator_select_background="#00000000"
@@ -77,7 +77,7 @@
                 android:id="@+id/indicator2"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                app:indicator_gravity="left"
+                app:indicator_gravity="LEFT"
                 app:indicator_height="15dp"
                 app:indicator_margin="8dp"
                 app:indicator_select_background="@color/colorPrimaryDark"

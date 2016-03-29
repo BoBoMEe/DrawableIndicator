@@ -2,8 +2,6 @@ package com.bobomee.android.drawableindicator.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.ImageView;
@@ -55,11 +53,9 @@ public class DrawableIndicator extends BaseIndicator {
     @Override
     public void OnSetIndicatorView(ImageView mIndicatorView, int position) {
 
+        super.OnSetIndicatorView(mIndicatorView, position);
         if (null != mIndicatorDrawable) {
-            mIndicatorDrawable.setColorFilter(Color.TRANSPARENT, PorterDuff.Mode.SRC_OVER);
             mIndicatorView.setImageDrawable(mIndicatorDrawable);
-        } else {
-            super.OnSetIndicatorView(mIndicatorView, position);
         }
 
     }
@@ -67,32 +63,26 @@ public class DrawableIndicator extends BaseIndicator {
     @Override
     public void OnSetSelectedIndicatorView(ImageView mSelectedIndicatorView) {
 
+        super.OnSetSelectedIndicatorView(mSelectedIndicatorView);
         if (null != mSelectedIndicatorDrawable) {
-            mSelectedIndicatorDrawable.setColorFilter(Color.TRANSPARENT, PorterDuff.Mode.SRC_OVER);
             mSelectedIndicatorView.setImageDrawable(mSelectedIndicatorDrawable);
-        } else {
-            super.OnSetSelectedIndicatorView(mSelectedIndicatorView);
         }
 
     }
 
-    @Override
     public Drawable getmIndicatorDrawable() {
         return mIndicatorDrawable;
     }
 
-    @Override
     public void setmIndicatorDrawable(Drawable mIndicatorDrawable) {
         this.mIndicatorDrawable = mIndicatorDrawable;
         invalidate();
     }
 
-    @Override
     public Drawable getmSelectedIndicatorDrawable() {
         return mSelectedIndicatorDrawable;
     }
 
-    @Override
     public void setmSelectedIndicatorDrawable(Drawable mSelectedIndicatorDrawable) {
         this.mSelectedIndicatorDrawable = mSelectedIndicatorDrawable;
         invalidate();

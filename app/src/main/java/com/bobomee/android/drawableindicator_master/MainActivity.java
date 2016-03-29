@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(new FragmentStateAdapter(getSupportFragmentManager()));
         viewPager.startAutoScroll();
         viewPager.setDirection(0);
-        baseIndicator.setViewPagr(viewPager);
+        baseIndicator.setViewPager(viewPager);
 
     }
 
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager.setAdapter(new FragmentStateAdapter(getSupportFragmentManager()));
         viewPager.startAutoScroll();
-        baseIndicator.setViewPagr(viewPager);
+        baseIndicator.setViewPager(viewPager);
 
     }
 
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager.setAdapter(new BasePagerAdapter());
         viewPager.startAutoScroll();
-        baseIndicator.setViewPagr(viewPager);
+        baseIndicator.setViewPager(viewPager);
 
     }
 
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager.setAdapter(new BasePagerAdapter());
         viewPager.startAutoScroll();
-        baseIndicator.setViewPagr(viewPager);
+        baseIndicator.setViewPager(viewPager);
 
     }
 

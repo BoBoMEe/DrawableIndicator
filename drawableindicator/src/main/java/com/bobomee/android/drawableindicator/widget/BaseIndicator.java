@@ -89,7 +89,7 @@ public class BaseIndicator extends ViewGroup {
         typedArray.recycle();
     }
 
-    public void setViewPagr(ViewPager mViewPager) {
+    public void setViewPager(ViewPager mViewPager) {
         this.mViewPager = mViewPager;
         PagerAdapter mPagerAdapter = mViewPager.getAdapter();
 
@@ -120,41 +120,30 @@ public class BaseIndicator extends ViewGroup {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 if (mIndicatorIsSnap) {
-                    translate(position, positionOffset);
+                    translate(position, positionOffset, positionOffsetPixels);
                 }
-                BaseIndicator.this.onPageScrolled(position, positionOffset, positionOffsetPixels);
             }
 
             @Override
             public void onPageSelected(int position) {
                 if (!mIndicatorIsSnap) {
-                    translate(position, 0);
+                    translate(position, 0, 0);
                 }
-                BaseIndicator.this.onPageSelected(position);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-                BaseIndicator.this.onPageScrollStateChanged(state);
             }
 
         });
     }
 
-    private void translate(int position, float positionOffset) {
+    private void translate(int position, float positionOffset, int positionOffsetPixels) {
         View item = getChildAt(position);
         float x = item.getX() + (mIndicatorMargin + mIndicatorWidth) * positionOffset;
-        getChildAt(mIndicatorCount).setX(x);
+        ImageView mSelectedIndicatorView = (ImageView) getChildAt(mIndicatorCount);
+        mSelectedIndicatorView.setX(x);
+        BaseIndicator.this.onPageScrolled(mSelectedIndicatorView, positionOffset, positionOffsetPixels);
         invalidate();
     }
 
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-    }
-
-    public void onPageSelected(int position) {
-    }
-
-    public void onPageScrollStateChanged(int state) {
+    public void onPageScrolled(ImageView mSelectedIndicatorView, float positionOffset, int positionOffsetPixels) {
     }
 
     @Override

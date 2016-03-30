@@ -34,6 +34,12 @@ public class BaseIndicator extends ViewGroup {
     protected Drawable mIndicatorBackgroundDrawable;
     protected Drawable mSelectedIndicatorBackgroundDrawable;
 
+    protected Drawable mIndicatorDrawable;
+    protected Drawable mSelectedIndicatorDrawable;
+
+    protected int mCurrentPositon;
+    protected int mLastPositon;
+
     protected boolean mIndicatorIsSnap = true;
 
     protected int dp2px(float dp) {
@@ -84,6 +90,8 @@ public class BaseIndicator extends ViewGroup {
         mSelectedIndicatorBackgroundDrawable = typedArray.getDrawable(R.styleable.BaseIndicator_indicator_select_background);
         if (null == mSelectedIndicatorBackgroundDrawable)
             mSelectedIndicatorBackgroundDrawable = new ColorDrawable(0x88a7d84c);
+        mIndicatorDrawable = typedArray.getDrawable(R.styleable.BaseIndicator_indicator_unselect_src);
+        mSelectedIndicatorDrawable = typedArray.getDrawable(R.styleable.BaseIndicator_indicator_select_src);
         mIndicatorIsSnap = typedArray.getBoolean(R.styleable.BaseIndicator_indicator_isSnap, mIndicatorIsSnap);
 
         typedArray.recycle();
@@ -119,31 +127,38 @@ public class BaseIndicator extends ViewGroup {
 
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                ImageView mSelectedIndicatorView = (ImageView) getChildAt(mIndicatorCount);
                 if (mIndicatorIsSnap) {
-                    translate(position, positionOffset, positionOffsetPixels);
+                    translate(mSelectedIndicatorView, position, positionOffset);
                 }
+                BaseIndicator.this.onPageScrolled(mSelectedIndicatorView, position, positionOffset, positionOffsetPixels);
             }
 
             @Override
             public void onPageSelected(int position) {
+                mCurrentPositon = position;
+                ImageView mSelectedIndicatorView = (ImageView) getChildAt(mIndicatorCount);
                 if (!mIndicatorIsSnap) {
-                    translate(position, 0, 0);
+                    translate(mSelectedIndicatorView, position, 0);
                 }
+                BaseIndicator.this.onPageSelected(mSelectedIndicatorView, position);
+                mLastPositon = mCurrentPositon;
             }
 
         });
     }
 
-    private void translate(int position, float positionOffset, int positionOffsetPixels) {
+    private void translate(View mSelectedIndicatorView, int position, float positionOffset) {
         View item = getChildAt(position);
         float x = item.getX() + (mIndicatorMargin + mIndicatorWidth) * positionOffset;
-        ImageView mSelectedIndicatorView = (ImageView) getChildAt(mIndicatorCount);
+
         mSelectedIndicatorView.setX(x);
-        BaseIndicator.this.onPageScrolled(mSelectedIndicatorView, positionOffset, positionOffsetPixels);
-        invalidate();
     }
 
-    public void onPageScrolled(ImageView mSelectedIndicatorView, float positionOffset, int positionOffsetPixels) {
+    public void onPageScrolled(ImageView mSelectedIndicatorView, int position, float positionOffset, int positionOffsetPixels) {
+    }
+
+    public void onPageSelected(ImageView mSelectedIndicatorView, int position) {
     }
 
     @Override
@@ -224,11 +239,17 @@ public class BaseIndicator extends ViewGroup {
     public void OnSetSelectedIndicatorView(ImageView mSelectedIndicatorView) {
         if (null != mSelectedIndicatorBackgroundDrawable)
             mSelectedIndicatorView.setBackgroundDrawable(mSelectedIndicatorBackgroundDrawable);
+        if (null != mSelectedIndicatorDrawable) {
+            mSelectedIndicatorView.setImageDrawable(mSelectedIndicatorDrawable);
+        }
     }
 
     public void OnSetIndicatorView(ImageView mIndicatorView, int position) {
         if (null != mIndicatorBackgroundDrawable)
             mIndicatorView.setBackgroundDrawable(mIndicatorBackgroundDrawable);
+        if (null != mIndicatorDrawable) {
+            mIndicatorView.setImageDrawable(mIndicatorDrawable);
+        }
     }
 
     @Override
@@ -311,6 +332,24 @@ public class BaseIndicator extends ViewGroup {
 
     public void setmSelectedIndicatorBackgroundDrawable(Drawable mSelectedIndicatorBackgroundDrawable) {
         this.mSelectedIndicatorBackgroundDrawable = mSelectedIndicatorBackgroundDrawable;
+        invalidate();
+    }
+
+    public Drawable getmIndicatorDrawable() {
+        return mIndicatorDrawable;
+    }
+
+    public void setmIndicatorDrawable(Drawable mIndicatorDrawable) {
+        this.mIndicatorDrawable = mIndicatorDrawable;
+        invalidate();
+    }
+
+    public Drawable getmSelectedIndicatorDrawable() {
+        return mSelectedIndicatorDrawable;
+    }
+
+    public void setmSelectedIndicatorDrawable(Drawable mSelectedIndicatorDrawable) {
+        this.mSelectedIndicatorDrawable = mSelectedIndicatorDrawable;
         invalidate();
     }
 }

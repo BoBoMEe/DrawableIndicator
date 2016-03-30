@@ -2,7 +2,6 @@
 <resources>
 
     <attr name="indicator_style" />
-    <attr name="drawable_indicator_style" />
 
     <attr name="indicator_width" format="dimension" />
     <attr name="indicator_height" format="dimension" />
@@ -26,11 +25,9 @@
         <attr name="indicator_gravity" />
         <attr name="indicator_select_background" />
         <attr name="indicator_unselect_background" />
+        <attr name="indicator_select_src" />
+        <attr name="indicator_unselect_src" />
         <attr name="indicator_isSnap" />
     </declare-styleable>
 
-    <declare-styleable name="DrawableIndicator">
-        <attr name="indicator_select_src" />
-        <attr name="indicator_unselect_src" />
-    </declare-styleable>
 </resources>

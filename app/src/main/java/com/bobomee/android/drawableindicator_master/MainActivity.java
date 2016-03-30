@@ -7,6 +7,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.bobomee.android.drawableindicator.anim.RotateEnter;
+import com.bobomee.android.drawableindicator.anim.ZoomInEnter;
+import com.bobomee.android.drawableindicator.widget.AnimIndicator;
 import com.bobomee.android.drawableindicator.widget.BaseIndicator;
 import com.bobomee.android.drawableindicator_master.adapter.BasePagerAdapter;
 import com.bobomee.android.drawableindicator_master.adapter.FragmentStateAdapter;
@@ -20,65 +23,68 @@ public class MainActivity extends AppCompatActivity {
 
     private View decorView;
 
+    private AutoScrollViewPager vp2R;
+    private AutoScrollViewPager vp2L;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_main);
+        setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         decorView = getWindow().getDecorView();
 
-        initBaseIndicator();
+        vp2R = find(decorView, R.id.main_vp1);
+        vp2R.setAdapter(new FragmentStateAdapter(getSupportFragmentManager()));
+        vp2R.setDirection(AutoScrollViewPager.RIGHT);
+        vp2R.startAutoScroll();
+
+        vp2L = find(decorView, R.id.main_vp2);
+        vp2L.setAdapter(new BasePagerAdapter());
+        vp2L.setDirection(AutoScrollViewPager.LEFT);
+        vp2L.startAutoScroll();
+
+        initBaseIndicator0();
         initBaseIndicator1();
         initBaseIndicator2();
         initBaseIndicator3();
-
+        initBaseIndicator4();
+        initBaseIndicator5();
     }
 
-    private void initBaseIndicator() {
-
-        AutoScrollViewPager viewPager = find(decorView, R.id.main_vp);
-        BaseIndicator baseIndicator = find(decorView, R.id.indicator);
-
-        viewPager.setAdapter(new FragmentStateAdapter(getSupportFragmentManager()));
-        viewPager.startAutoScroll();
-        viewPager.setDirection(0);
-        baseIndicator.setViewPager(viewPager);
-
+    private void initBaseIndicator0() {
+        BaseIndicator baseIndicator0 = find(decorView, R.id.indicator0);
+        baseIndicator0.setViewPager(vp2L);
     }
 
     private void initBaseIndicator1() {
-
-        AutoScrollViewPager viewPager = find(decorView, R.id.main_vp1);
-        BaseIndicator baseIndicator = find(decorView, R.id.indicator1);
-
-        viewPager.setAdapter(new FragmentStateAdapter(getSupportFragmentManager()));
-        viewPager.startAutoScroll();
-        baseIndicator.setViewPager(viewPager);
-
+        BaseIndicator baseIndicator1 = find(decorView, R.id.indicator1);
+        baseIndicator1.setViewPager(vp2R);
     }
 
     private void initBaseIndicator2() {
-
-        AutoScrollViewPager viewPager = find(decorView, R.id.main_vp2);
         BaseIndicator baseIndicator = find(decorView, R.id.indicator2);
-
-        viewPager.setAdapter(new BasePagerAdapter());
-        viewPager.startAutoScroll();
-        baseIndicator.setViewPager(viewPager);
-
+        baseIndicator.setViewPager(vp2L);
     }
 
     private void initBaseIndicator3() {
-
-        AutoScrollViewPager viewPager = find(decorView, R.id.main_vp3);
         BaseIndicator baseIndicator = find(decorView, R.id.indicator3);
+        baseIndicator.setViewPager(vp2L);
+    }
 
-        viewPager.setAdapter(new BasePagerAdapter());
-        viewPager.startAutoScroll();
-        baseIndicator.setViewPager(viewPager);
+    private void initBaseIndicator4() {
+        BaseIndicator baseIndicator = find(decorView, R.id.indicator4);
+        baseIndicator.setViewPager(vp2R);
+    }
 
+    private void initBaseIndicator5() {
+        AnimIndicator baseIndicator = find(decorView, R.id.indicator5);
+        baseIndicator.setUnselectAnimClass(RotateEnter.class)
+                .setSelectAnimClass(ZoomInEnter.class)
+                .setMovingAnimClass(RotateEnter.class)
+        ;
+        baseIndicator.setViewPager(vp2R);
     }
 
 

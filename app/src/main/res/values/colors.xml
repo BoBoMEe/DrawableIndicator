@@ -5,4 +5,5 @@
     <color name="colorAccent">#88FF4081</color>
     <color name="half_white">#88ffffff</color>
     <color name="half_yellow">#88a7d84c</color>
+    <color name="trans">#00000000</color>
 </resources>

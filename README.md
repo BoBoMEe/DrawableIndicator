@@ -5,7 +5,7 @@ Android drawable indicaotor for viewpager
 
 ## ScreenShot
 
-![DrawableIndicator_Master](screen.png "DrawableIndicator")
+![DrawableIndicator_Master](gif.gif "DrawableIndicator")
 
 ## Usage
 
@@ -17,7 +17,7 @@ in layout xml
                 android:id="@+id/indicator1"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                app:indicator_gravity="right"
+                app:indicator_gravity="RIGHT"
                 app:indicator_height="8dp"
                 app:indicator_margin="8dp"
                 app:indicator_select_background="#00000000"

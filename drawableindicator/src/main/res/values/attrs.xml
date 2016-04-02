@@ -11,22 +11,22 @@
         <enum name="LEFT" value="3" />
         <enum name="RIGHT" value="5" />
     </attr>
-    <attr name="indicator_select_background" format="reference|color" />
-    <attr name="indicator_unselect_background" format="reference|color" />
+    <attr name="indicator_moving_background" format="reference|color" />
+    <attr name="indicator_background" format="reference|color" />
     <attr name="indicator_isSnap" format="boolean" />
 
-    <attr name="indicator_select_src" format="reference|color" />
-    <attr name="indicator_unselect_src" format="reference|color" />
+    <attr name="indicator_moving_src" format="reference|color" />
+    <attr name="indicator_src" format="reference|color" />
 
     <declare-styleable name="BaseIndicator">
         <attr name="indicator_width" />
         <attr name="indicator_height" />
         <attr name="indicator_margin" />
         <attr name="indicator_gravity" />
-        <attr name="indicator_select_background" />
-        <attr name="indicator_unselect_background" />
-        <attr name="indicator_select_src" />
-        <attr name="indicator_unselect_src" />
+        <attr name="indicator_moving_background" />
+        <attr name="indicator_background" />
+        <attr name="indicator_moving_src" />
+        <attr name="indicator_src" />
         <attr name="indicator_isSnap" />
     </declare-styleable>
 

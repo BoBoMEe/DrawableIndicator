@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="30dp" />
 
-    <com.scrollloopviewpager.autoscrollviewpager.AutoScrollViewPager
+    <com.bobomee.android.scrollloopviewpager.autoscrollviewpager.AutoScrollViewPager
         android:id="@+id/main_vp1"
         android:layout_width="match_parent"
         android:layout_height="50dp" />
@@ -24,11 +24,11 @@
         app:indicator_gravity="LEFT"
         app:indicator_height="30dp"
         app:indicator_margin="5dp"
-        app:indicator_select_src="@drawable/select_drawable"
-        app:indicator_unselect_src="@drawable/unselect_drawable"
+        app:indicator_moving_src="@drawable/select_drawable"
+        app:indicator_src="@drawable/unselect_drawable"
         app:indicator_width="50dp" />
 
-    <com.scrollloopviewpager.autoscrollviewpager.AutoScrollViewPager
+    <com.bobomee.android.scrollloopviewpager.autoscrollviewpager.AutoScrollViewPager
         android:id="@+id/main_vp2"
         android:layout_width="match_parent"
         android:layout_height="50dp" />
@@ -41,10 +41,10 @@
         app:indicator_height="8dp"
         app:indicator_isSnap="true"
         app:indicator_margin="8dp"
-        app:indicator_select_background="@color/trans"
-        app:indicator_select_src="@drawable/banner_dot_select"
-        app:indicator_unselect_background="@color/trans"
-        app:indicator_unselect_src="@drawable/banner_dot_unselect"
+        app:indicator_moving_background="@color/trans"
+        app:indicator_moving_src="@drawable/banner_dot_select"
+        app:indicator_background="@color/trans"
+        app:indicator_src="@drawable/banner_dot_unselect"
         app:indicator_width="8dp" />
 
     <com.bobomee.android.drawableindicator.widget.BaseIndicator
@@ -53,9 +53,9 @@
         android:layout_height="30dp"
         app:indicator_height="15dp"
         app:indicator_margin="8dp"
-        app:indicator_select_background="@color/trans"
-        app:indicator_select_src="@drawable/banner_dot_select"
-        app:indicator_unselect_background="@color/colorPrimary"
+        app:indicator_moving_background="@color/trans"
+        app:indicator_moving_src="@drawable/banner_dot_select"
+        app:indicator_background="@color/colorPrimary"
         app:indicator_width="15dp" />
 
     <com.bobomee.android.drawableindicator.widget.BaseIndicator
@@ -64,10 +64,10 @@
         android:layout_height="30dp"
         app:indicator_height="15dp"
         app:indicator_margin="8dp"
-        app:indicator_select_background="@drawable/select_oval_drawable"
-        app:indicator_select_src="@color/trans"
-        app:indicator_unselect_background="@color/trans"
-        app:indicator_unselect_src="@drawable/unselect_oval_drawable"
+        app:indicator_moving_background="@drawable/select_oval_drawable"
+        app:indicator_moving_src="@color/trans"
+        app:indicator_background="@color/trans"
+        app:indicator_src="@drawable/unselect_oval_drawable"
         app:indicator_width="15dp" />
 
     <com.bobomee.android.drawableindicator.widget.AnimIndicator
@@ -76,7 +76,7 @@
         android:layout_height="50dp"
         app:indicator_height="30dp"
         app:indicator_margin="15dp"
-        app:indicator_select_src="@drawable/vactor_drawable"
+        app:indicator_moving_src="@drawable/vactor_drawable"
         app:indicator_width="30dp" />
 
 </LinearLayout>

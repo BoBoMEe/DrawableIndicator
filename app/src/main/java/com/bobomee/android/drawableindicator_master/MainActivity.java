@@ -13,7 +13,7 @@ import com.bobomee.android.drawableindicator.widget.AnimIndicator;
 import com.bobomee.android.drawableindicator.widget.BaseIndicator;
 import com.bobomee.android.drawableindicator_master.adapter.BasePagerAdapter;
 import com.bobomee.android.drawableindicator_master.adapter.FragmentStateAdapter;
-import com.scrollloopviewpager.autoscrollviewpager.AutoScrollViewPager;
+import com.bobomee.android.scrollloopviewpager.autoscrollviewpager.AutoScrollViewPager;
 
 public class MainActivity extends AppCompatActivity {
 

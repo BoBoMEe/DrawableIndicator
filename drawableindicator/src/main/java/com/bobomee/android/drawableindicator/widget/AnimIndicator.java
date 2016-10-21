@@ -3,7 +3,6 @@ package com.bobomee.android.drawableindicator.widget;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.ImageView;
-
 import com.bobomee.android.drawableindicator.anim.BaseAnimator;
 
 /**
@@ -78,4 +77,5 @@ public class AnimIndicator extends BaseIndicator {
             e.printStackTrace();
         }
     }
+
 }

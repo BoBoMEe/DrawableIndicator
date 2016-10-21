@@ -75,7 +75,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         app:indicator_height="30dp"
-        app:indicator_margin="15dp"
+        app:indicator_margin="25dp"
         app:indicator_moving_src="@drawable/vactor_drawable"
         app:indicator_width="30dp" />
 

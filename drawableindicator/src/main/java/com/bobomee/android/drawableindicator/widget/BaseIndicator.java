@@ -11,10 +11,13 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.Interpolator;
 import android.widget.ImageView;
-
 import com.bobomee.android.drawableindicator.R;
 
 
@@ -42,6 +45,10 @@ public class BaseIndicator extends ViewGroup {
     protected int mLastPositon;
 
     protected boolean mIndicatorIsSnap = true;
+
+    private Interpolator mStartInterpolator = new AccelerateDecelerateInterpolator();
+
+    private OnIndicatorClickListener mOnIndicatorClickListener;
 
     protected int dp2px(float dp) {
         float scale = getContext().getResources().getDisplayMetrics().density;
@@ -74,6 +81,7 @@ public class BaseIndicator extends ViewGroup {
 
     private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         handleAttrs(context, attrs, defStyleAttr, defStyleRes);
+        mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
     }
 
     private void handleAttrs(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -149,7 +157,9 @@ public class BaseIndicator extends ViewGroup {
 
     private void translate(View mSelectedIndicatorView, int position, float positionOffset) {
         View item = getChildAt(position);
-        float x = item.getX() + (mIndicatorMargin + mIndicatorWidth) * positionOffset;
+        float x = item.getX()
+                + (mIndicatorMargin + mIndicatorWidth) * mStartInterpolator.getInterpolation(
+                positionOffset);
 
         mSelectedIndicatorView.setX(x);
     }
@@ -271,6 +281,64 @@ public class BaseIndicator extends ViewGroup {
         canvas.restoreToCount(sc);
     }
 
+    private float mDownX;
+    private float mDownY;
+    private boolean mTouchable;
+    private int mTouchSlop;
+
+    @Override public boolean onTouchEvent(MotionEvent event) {
+        float x = event.getX();
+        float y = event.getY();
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                if (mTouchable) {
+                    mDownX = x;
+                    mDownY = y;
+                    return true;
+                }
+                break;
+            case MotionEvent.ACTION_UP:
+                if (mOnIndicatorClickListener != null) {
+                    if (Math.abs(x - mDownX) <= mTouchSlop && Math.abs(y - mDownY) <= mTouchSlop) {
+                        float max = Float.MAX_VALUE;
+                        int index = 0;
+                        for (int i = 0; i < getChildCount(); i++) {
+                            View view = getChildAt(i);
+                            float offset = Math.abs(view.getX() - x);
+                            if (offset < max) {
+                                max = offset;
+                                index = i;
+                            }
+                        }
+                        mOnIndicatorClickListener.onClick(index);
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+        return super.onTouchEvent(event);
+    }
+
+    public boolean isTouchable() {
+        return mTouchable;
+    }
+
+    public void setTouchable(boolean touchable) {
+        mTouchable = touchable;
+    }
+
+    public OnIndicatorClickListener getOnIndicatorClickListener() {
+        return mOnIndicatorClickListener;
+    }
+
+    public void setOnIndicatorClickListener(OnIndicatorClickListener _onIndicatorClickListener) {
+        if (!mTouchable) {
+            mTouchable = true;
+        }
+        mOnIndicatorClickListener = _onIndicatorClickListener;
+    }
+
     public int getmIndicatorWidth() {
         return mIndicatorWidth;
     }
@@ -350,5 +418,16 @@ public class BaseIndicator extends ViewGroup {
     public void setmMovingIndicatorSrcDrawable(Drawable mMovingIndicatorSrcDrawable) {
         this.mMovingIndicatorSrcDrawable = mMovingIndicatorSrcDrawable;
         invalidate();
+    }
+
+    public Interpolator getStartInterpolator() {
+        return mStartInterpolator;
+    }
+
+    public void setStartInterpolator(Interpolator startInterpolator) {
+        mStartInterpolator = startInterpolator;
+        if (mStartInterpolator == null) {
+            mStartInterpolator = new AccelerateDecelerateInterpolator();
+        }
     }
 }

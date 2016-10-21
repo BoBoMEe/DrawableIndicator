@@ -6,11 +6,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
+import android.view.animation.OvershootInterpolator;
 import com.bobomee.android.drawableindicator.anim.RotateEnter;
 import com.bobomee.android.drawableindicator.anim.ZoomInEnter;
 import com.bobomee.android.drawableindicator.widget.AnimIndicator;
 import com.bobomee.android.drawableindicator.widget.BaseIndicator;
+import com.bobomee.android.drawableindicator.widget.OnIndicatorClickListener;
 import com.bobomee.android.drawableindicator_master.adapter.BasePagerAdapter;
 import com.bobomee.android.drawableindicator_master.adapter.FragmentStateAdapter;
 import com.bobomee.android.scrollloopviewpager.autoscrollviewpager.AutoScrollViewPager;
@@ -60,6 +61,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void initBaseIndicator1() {
         BaseIndicator baseIndicator1 = find(decorView, R.id.indicator1);
+        baseIndicator1.setOnIndicatorClickListener(new OnIndicatorClickListener() {
+            @Override public void onClick(int index) {
+                vp2R.setCurrentItem(index);
+            }
+        });
         baseIndicator1.setViewPager(vp2R);
     }
 
@@ -84,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 .setSelectAnimClass(ZoomInEnter.class)
                 .setMovingAnimClass(RotateEnter.class)
         ;
+        baseIndicator.setStartInterpolator(new OvershootInterpolator(3.f));
         baseIndicator.setViewPager(vp2R);
     }
 

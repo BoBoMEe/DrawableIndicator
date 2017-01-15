@@ -14,7 +14,7 @@ Android drawable indicaotor for viewpager
 <dependency>
   <groupId>com.bobomee.android</groupId>
   <artifactId>drawableindicator</artifactId>
-  <version>1.3</version>
+  <version>1.5</version>
   <type>aar</type>
 </dependency>
 ```
@@ -22,7 +22,7 @@ Android drawable indicaotor for viewpager
 - `gradle`
 
 ``` java
-    compile 'com.bobomee.android:drawableindicator:1.3'
+    compile 'com.bobomee.android:drawableindicator:1.5'
 ```
 ## Usage
 
@@ -73,7 +73,7 @@ in layout xml
                 android:id="@+id/main_vp3"
                 android:layout_width="match_parent"
                 android:layout_height="150dp" />
-            <com.bobomee.android.drawableindicator.widget.DrawableIndicator
+<com.bobomee.android.drawableindicator.widget.BaseIndicator
                 android:id="@+id/indicator3"
                 android:layout_width="match_parent"
                 android:layout_height="30dp" />

@@ -32,6 +32,8 @@ public class AnimIndicator extends BaseIndicator {
 
     /**
      * 设置显示器选中动画
+     * @param selectAnimClass 选中动画class
+     * @return this
      */
     public AnimIndicator setSelectAnimClass(Class<? extends BaseAnimator> selectAnimClass) {
         this.mSelectAnimClass = selectAnimClass;
@@ -40,6 +42,8 @@ public class AnimIndicator extends BaseIndicator {
 
     /**
      * 设置显示器未选中动画
+     * @param unselectAnimClass 未选中动画class
+     * @return this
      */
     public AnimIndicator setUnselectAnimClass(Class<? extends BaseAnimator> unselectAnimClass) {
         this.mUnselectAnimClass = unselectAnimClass;
@@ -48,6 +52,8 @@ public class AnimIndicator extends BaseIndicator {
 
     /**
      * 设置移动的View的动画
+     * @param mMovingAnimClass 移动的动画 class
+     * @return this
      */
     public AnimIndicator setMovingAnimClass(Class<? extends BaseAnimator> mMovingAnimClass) {
         this.mMovingAnimClass = mMovingAnimClass;

@@ -7,7 +7,6 @@ import android.graphics.Canvas;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -23,7 +22,7 @@ import com.bobomee.android.drawableindicator.R;
  * Created on 16/3/27.下午4:20.
  * @author bobomee.
  */
-public class BaseIndicator extends ViewGroup implements ViewPager.OnPageChangeListener {
+public class BaseIndicator extends ViewGroup implements PageChangeListener {
 
   protected int mIndicatorWidth = 6;
   protected int mIndicatorHeight = 6;

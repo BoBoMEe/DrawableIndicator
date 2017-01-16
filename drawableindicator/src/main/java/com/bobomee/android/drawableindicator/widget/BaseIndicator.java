@@ -8,7 +8,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -25,14 +24,13 @@ import com.bobomee.android.drawableindicator.R;
  * Created on 16/3/27.下午4:20.
  * @author bobomee.
  */
-public class BaseIndicator extends ViewGroup {
+public class BaseIndicator extends ViewGroup implements ViewPager.OnPageChangeListener {
 
   protected int mIndicatorWidth = 6;
   protected int mIndicatorHeight = 6;
   protected int mIndicatorMargin = 6;
   protected int mIndicatorGravity = Gravity.CENTER;
 
-  protected ViewPager mViewPager;
   protected int mIndicatorCount;
 
   protected Drawable mIndicatorBackgroundDrawable;
@@ -83,6 +81,8 @@ public class BaseIndicator extends ViewGroup {
   private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
     handleAttrs(context, attrs, defStyleAttr, defStyleRes);
     mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
+
+    initViews();
   }
 
   private void handleAttrs(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -118,19 +118,6 @@ public class BaseIndicator extends ViewGroup {
     typedArray.recycle();
   }
 
-  public void setViewPager(@NonNull ViewPager mViewPager) {
-    this.mViewPager = mViewPager;
-    PagerAdapter mPagerAdapter = mViewPager.getAdapter();
-
-    if (null != mPagerAdapter) {
-      this.mIndicatorCount = mPagerAdapter.getCount();
-
-      initViews();
-
-      initListeners();
-    }
-  }
-
   private void initViews() {
     for (int i = 0; i < mIndicatorCount; ++i) {
       ImageView mIndicatorView = new ImageView(getContext());
@@ -144,35 +131,6 @@ public class BaseIndicator extends ViewGroup {
     }
   }
 
-  private void initListeners() {
-    mViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-
-      @Override
-      public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        if (null != mMovingIndicatorView) {
-
-          if (mIndicatorIsSnap) {
-            translate(mMovingIndicatorView, position, positionOffset);
-          }
-          BaseIndicator.this.onPageScrolled(mMovingIndicatorView, position, positionOffset,
-              positionOffsetPixels);
-        }
-      }
-
-      @Override public void onPageSelected(int position) {
-        mCurrentPositon = position;
-        if (null != mMovingIndicatorView) {
-
-          if (!mIndicatorIsSnap) {
-            translate(mMovingIndicatorView, position, 0);
-          }
-          BaseIndicator.this.onPageSelected(mMovingIndicatorView, position);
-        }
-        mLastPositon = mCurrentPositon;
-      }
-    });
-  }
-
   private void translate(@NonNull View mSelectedIndicatorView, int position, float positionOffset) {
     View item = getChildAt(position);
     float x =
@@ -182,11 +140,11 @@ public class BaseIndicator extends ViewGroup {
     mSelectedIndicatorView.setX(x);
   }
 
-  public void onPageScrolled(ImageView mSelectedIndicatorView, int position, float positionOffset,
+  void onPageScrolled(ImageView mSelectedIndicatorView, int position, float positionOffset,
       int positionOffsetPixels) {
   }
 
-  public void onPageSelected(ImageView mSelectedIndicatorView, int position) {
+  void onPageSelected(ImageView mSelectedIndicatorView, int position) {
   }
 
   @Override protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -451,5 +409,43 @@ public class BaseIndicator extends ViewGroup {
     if (mStartInterpolator == null) {
       mStartInterpolator = new AccelerateDecelerateInterpolator();
     }
+  }
+
+  @Override
+  public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+    if (null != mMovingIndicatorView) {
+
+      if (mIndicatorIsSnap) {
+        translate(mMovingIndicatorView, position, positionOffset);
+      }
+      BaseIndicator.this.onPageScrolled(mMovingIndicatorView, position, positionOffset,
+          positionOffsetPixels);
+    }
+  }
+
+  @Override public void onPageSelected(int position) {
+    mCurrentPositon = position;
+    if (null != mMovingIndicatorView) {
+
+      if (!mIndicatorIsSnap) {
+        translate(mMovingIndicatorView, position, 0);
+      }
+      BaseIndicator.this.onPageSelected(mMovingIndicatorView, position);
+    }
+    mLastPositon = mCurrentPositon;
+  }
+
+  @Override public void onPageScrollStateChanged(int state) {
+
+  }
+
+  public int getIndicatorCount() {
+    return mIndicatorCount;
+  }
+
+  public void setIndicatorCount(int pIndicatorCount) {
+    mIndicatorCount = pIndicatorCount;
+    initViews();
+    invalidate();
   }
 }

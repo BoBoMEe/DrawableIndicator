@@ -54,8 +54,7 @@ public class AnimIndicator extends BaseIndicator {
         return this;
     }
 
-    @Override
-    public void onPageSelected(ImageView mSelectedIndicatorView, int position) {
+    @Override void onPageSelected(ImageView mSelectedIndicatorView, int position) {
         super.onPageSelected(mSelectedIndicatorView, position);
 
         ImageView lastView = (ImageView) getChildAt(mLastPositon);

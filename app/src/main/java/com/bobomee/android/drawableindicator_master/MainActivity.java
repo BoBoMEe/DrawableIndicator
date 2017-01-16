@@ -1,6 +1,7 @@
 package com.bobomee.android.drawableindicator_master;
 
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -26,6 +27,24 @@ public class MainActivity extends AppCompatActivity {
 
     private AutoScrollViewPager vp2R;
     private AutoScrollViewPager vp2L;
+
+    private void setIndicator(final BaseIndicator pBaseIndicator0, final ViewPager viewPager) {
+        pBaseIndicator0.setIndicatorCount(viewPager.getAdapter().getCount());
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override public void onPageScrolled(int position, float positionOffset,
+                int positionOffsetPixels) {
+                pBaseIndicator0.onPageScrolled(position, positionOffset, positionOffsetPixels);
+            }
+
+            @Override public void onPageSelected(int position) {
+                pBaseIndicator0.onPageSelected(position);
+            }
+
+            @Override public void onPageScrollStateChanged(int state) {
+                pBaseIndicator0.onPageScrollStateChanged(state);
+            }
+        });
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +74,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initBaseIndicator0() {
-        BaseIndicator baseIndicator0 = find(decorView, R.id.indicator0);
-        baseIndicator0.setViewPager(vp2L);
+        final BaseIndicator baseIndicator0 = find(decorView, R.id.indicator0);
+
+        setIndicator(baseIndicator0, vp2L);
     }
 
     private void initBaseIndicator1() {
@@ -66,22 +86,22 @@ public class MainActivity extends AppCompatActivity {
                 vp2R.setCurrentItem(index);
             }
         });
-        baseIndicator1.setViewPager(vp2R);
+        setIndicator(baseIndicator1, vp2R);
     }
 
     private void initBaseIndicator2() {
         BaseIndicator baseIndicator = find(decorView, R.id.indicator2);
-        baseIndicator.setViewPager(vp2L);
+        setIndicator(baseIndicator, vp2L);
     }
 
     private void initBaseIndicator3() {
         BaseIndicator baseIndicator = find(decorView, R.id.indicator3);
-        baseIndicator.setViewPager(vp2L);
+        setIndicator(baseIndicator, vp2L);
     }
 
     private void initBaseIndicator4() {
         BaseIndicator baseIndicator = find(decorView, R.id.indicator4);
-        baseIndicator.setViewPager(vp2R);
+        setIndicator(baseIndicator, vp2R);
     }
 
     private void initBaseIndicator5() {
@@ -91,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                 .setMovingAnimClass(RotateEnter.class)
         ;
         baseIndicator.setStartInterpolator(new OvershootInterpolator(3.f));
-        baseIndicator.setViewPager(vp2R);
+        setIndicator(baseIndicator, vp2R);
     }
 
 

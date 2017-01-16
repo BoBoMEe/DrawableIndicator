@@ -14,7 +14,7 @@ Android drawable indicaotor for viewpager
 <dependency>
   <groupId>com.bobomee.android</groupId>
   <artifactId>drawableindicator</artifactId>
-  <version>1.5</version>
+  <version>1.6</version>
   <type>aar</type>
 </dependency>
 ```
@@ -22,7 +22,7 @@ Android drawable indicaotor for viewpager
 - `gradle`
 
 ``` java
-    compile 'com.bobomee.android:drawableindicator:1.5'
+    compile 'com.bobomee.android:drawableindicator:1.6'
 ```
 ## Usage
 
@@ -61,7 +61,8 @@ private void initBaseIndicator1() {
                 ;
         viewPager.setAdapter(new FragmentStateAdapter(getSupportFragmentManager()));
         viewPager.startAutoScroll();
-        baseIndicator.setViewPagr(viewPager);
+        baseIndicator.setIndicatorCount(viewPager.getAdapter().getCount());
+        viewPager.addOnPageChangeListener(...);
     }
 ```
 
@@ -87,7 +88,8 @@ int Java Code
         BaseIndicator baseIndicator = find(decorView, R.id.indicator3);
         viewPager.setAdapter(new BasePagerAdapter());
         viewPager.startAutoScroll();
-        baseIndicator.setViewPagr(viewPager);
+        baseIndicator.setIndicatorCount(viewPager.getAdapter().getCount());
+        viewPager.addOnPageChangeListener(...);
     }
 ```
 

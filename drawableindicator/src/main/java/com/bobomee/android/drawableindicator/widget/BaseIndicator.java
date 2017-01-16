@@ -7,7 +7,6 @@ import android.graphics.Canvas;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -131,12 +130,12 @@ public class BaseIndicator extends ViewGroup implements ViewPager.OnPageChangeLi
     }
   }
 
-  private void translate(@NonNull View mSelectedIndicatorView, int position, float positionOffset) {
+  private void translate(View mSelectedIndicatorView, int position, float positionOffset) {
     View item = getChildAt(position);
     float x =
         item.getX() + (mIndicatorMargin + mIndicatorWidth) * mStartInterpolator.getInterpolation(
             positionOffset);
-
+    if (null != mSelectedIndicatorView)
     mSelectedIndicatorView.setX(x);
   }
 
@@ -225,21 +224,25 @@ public class BaseIndicator extends ViewGroup implements ViewPager.OnPageChangeLi
     return (int) (containerWidth - tabItemsLength);
   }
 
-  public void OnSetSelectedIndicatorView(@NonNull ImageView mSelectedIndicatorView) {
-    if (null != mMovingIndicatorBackgroundDrawable) {
-      mSelectedIndicatorView.setBackgroundDrawable(mMovingIndicatorBackgroundDrawable);
-    }
-    if (null != mMovingIndicatorSrcDrawable) {
-      mSelectedIndicatorView.setImageDrawable(mMovingIndicatorSrcDrawable);
+  public void OnSetSelectedIndicatorView(ImageView mSelectedIndicatorView) {
+    if (null != mSelectedIndicatorView){
+      if (null != mMovingIndicatorBackgroundDrawable) {
+        mSelectedIndicatorView.setBackgroundDrawable(mMovingIndicatorBackgroundDrawable);
+      }
+      if (null != mMovingIndicatorSrcDrawable) {
+        mSelectedIndicatorView.setImageDrawable(mMovingIndicatorSrcDrawable);
+      }
     }
   }
 
-  public void OnSetIndicatorView(@NonNull ImageView mIndicatorView, int position) {
-    if (null != mIndicatorBackgroundDrawable) {
-      mIndicatorView.setBackgroundDrawable(mIndicatorBackgroundDrawable);
-    }
-    if (null != mIndicatorSrcDrawable) {
-      mIndicatorView.setImageDrawable(mIndicatorSrcDrawable);
+  public void OnSetIndicatorView(ImageView mIndicatorView, int position) {
+    if (null != mIndicatorView){
+      if (null != mIndicatorBackgroundDrawable) {
+        mIndicatorView.setBackgroundDrawable(mIndicatorBackgroundDrawable);
+      }
+      if (null != mIndicatorSrcDrawable) {
+        mIndicatorView.setImageDrawable(mIndicatorSrcDrawable);
+      }
     }
   }
 
